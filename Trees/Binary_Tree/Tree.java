@@ -106,7 +106,7 @@ public class Tree {
             return true;
         }
         if(first!=null &&second!=null){
-            return first.value==second.value &&equals(first.left, second.left) &&equals(first.right, second.right);
+            return first.value==second.value && equals(first.left, second.left) && equals(first.right, second.right);
         }
         return false;
     }
@@ -122,6 +122,43 @@ public class Tree {
         last= current.value;
         return last;
     }
+    public void swap(){
+        var temp=root.left;
+        root.left=root.right;
+        root.right=temp;
+    }
+    public boolean check(){
+//        System.out.println(check);
+        return check(root);
+//        return
+    }
+
+    private boolean check(Node root){
+        if(root.left==null || root.right==null){
+            return true;
+        }
+        if(root.left.value-1< root.value && root.right.value+1> root.value){
+            check(root.left);
+            check(root.right);
+        }else{
+            return false;
+        }
+        return true;
+    }
+    public void distance(int dist){
+        distance(root, dist);
+    }
+    private void distance(Node root, int dist){
+        if(root==null){
+            return ;
+        }
+        if(dist==0){
+            System.out.println(root.value);
+            return;
+        }
+        distance(root.left, dist-1);
+        distance(root.right, dist-1);
+    }
 }
 
 class Main{
@@ -130,16 +167,21 @@ class Main{
         Tree tree2= new Tree();
         tree.insert(10);
         tree.insert(20);
-        tree.insert(3);
+        tree.insert(30);
+        tree.insert(25);
         tree.insert(5);
         tree.insert(15);
-        tree2.insert(10);
-        tree2.insert(20);
-        tree2.insert(30);
-        tree2.insert(5);
-        tree2.insert(15);
-        System.out.println(tree.equals(tree2));
-        System.out.println(tree.min());
+        tree.insert(18);
+        tree.distance(3);
+//        tree.swap();
+        System.out.println(tree.check());
+//        tree2.insert(10);
+//        tree2.insert(20);
+//        tree2.insert(30);
+//        tree2.insert(5);
+//        tree2.insert(15);
+//        System.out.println(tree.equals(tree2));
+//        System.out.println(tree.min());
 //        System.out.println(tree.find(15));
 //        System.out.println();
 //        tree.preOrderTraversal();
